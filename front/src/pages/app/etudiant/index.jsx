@@ -1,6 +1,6 @@
 const Student = () => {
     return (
-        ''
+        <div>etudiant</div>
     )
 }
 

@@ -1,5 +1,5 @@
 import { ProSidebarProvider } from 'react-pro-sidebar'
-import Applayout from '../../components/Applayout'
+import Applayout from '../../../components/Applayout'
 
 const Home = () => {
     return (

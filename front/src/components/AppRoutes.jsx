@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import Student from "../pages/etudiant"
-import School from "../pages/etablissement"
-import Factory from "../pages/entreprise"
+import Factory from "../pages/app/entreprise"
+import School from "../pages/app/etablissement"
+import Student from "../pages/app/etudiant"
 
 const AppRoutes = () => {
     return (

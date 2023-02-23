@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react"
 import AppRoutes from "./AppRoutes"
-import { Book, Calendar, Card, Diamond } from "mdi-material-ui"
+import { Book, Calendar, Card } from "mdi-material-ui"
 import { Badge, Box, Typography } from "@mui/material"
 import { Sidebar, Menu, SubMenu, MenuItem } from "react-pro-sidebar"
 import { useProSidebar } from "react-pro-sidebar"
@@ -55,7 +55,7 @@ const hexToRgba = (hex, alpha) => {
 
 const Applayout = memo(() => {
   const mobileMenuId = 'primary-search-account-menu-mobile'
-  const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } = useProSidebar();
+  const { toggleSidebar, collapsed, broken } = useProSidebar()
   const { height, width } = useWindowDimensions()
 
   const [theme, setTheme] = useState('light')
@@ -129,7 +129,6 @@ const Applayout = memo(() => {
                 <MenuItem component={<Link to="student" />}> Etudiant</MenuItem>
               </SubMenu>
             </Menu>
-
             <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
               <Typography
                 variant="body2"
@@ -139,7 +138,6 @@ const Applayout = memo(() => {
                 Extra
               </Typography>
             </div>
-
             <Menu menuItemStyles={menuItemStyles}>
               <MenuItem icon={<Calendar />} suffix={<Badge variant="success">New</Badge>}>
                 Calendar
