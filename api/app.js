@@ -47,6 +47,31 @@ app.get('/balances', async (req, res) => {
   }
 });
 
+app.get("/smart-contract", async (req, res) => {
+  console.log("res")
+  try {
+    const [nativeBalance, tokenBalances] = await Promise.all([
+      Moralis.EvmApi.balance.getNativeBalance({
+        chain: EvmChain.ETHEREUM,
+        address: "0xd9145CCE52D386f254917e481eB44e9943F39138",
+      }),
+      Moralis.EvmApi.token.getWalletTokenBalances({
+        chain: EvmChain.ETHEREUM,
+        address: "0xd9145CCE52D386f254917e481eB44e9943F39138",
+      }),
+    ]);
+    res.status(200).json({
+      address,
+      nativeBalance: nativeBalance.result.balance.ether,
+      tokenBalances: tokenBalances.result.map((token) => token.display()),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+    res.json({ error: error.message });
+  }
+});
+
 const startServer = async () => {
   await Moralis.start({
     apiKey: MORALIS_API_KEY,

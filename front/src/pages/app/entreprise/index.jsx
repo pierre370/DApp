@@ -30,7 +30,8 @@ const Factory = () => {
     const [balances, setBalances] = useState({});
 
     useEffect(() => {
-        axios('http://localhost:4000/balances').then(({ data }) => {
+        axios('http://localhost:4000/smart-contract').then(({ data }) => {
+            console.log(data)
         setBalances(data);
         });
     }, [])

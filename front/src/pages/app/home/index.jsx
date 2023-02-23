@@ -1,12 +1,8 @@
-import { ProSidebarProvider } from 'react-pro-sidebar'
-import Applayout from '../../../components/Applayout'
+import { Navigate } from 'react-router-dom'
 
 const Home = () => {
-    return (
-        <ProSidebarProvider>
-            <Applayout />
-        </ProSidebarProvider>
-    )
+
+    return <Navigate to='/app' />
 }
 
 export default Home
