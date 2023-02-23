@@ -121,34 +121,12 @@ const Applayout = memo(() => {
             </div>
             <Menu menuItemStyles={menuItemStyles}>
               <SubMenu
-                label="Cartes"
+                label="Menu"
                 icon={<Card />}
-                // suffix={
-                //   <Badge variant="danger" shape="circle">
-                //     6
-                //   </Badge>
-                // }
               >
-                <MenuItem component={<Link to="cards/uno" />}> Uno</MenuItem>
-                <MenuItem> Président</MenuItem>
-                <MenuItem> 6 qui prends</MenuItem>
-              </SubMenu>
-              <SubMenu label="Jeux de plateaux" xmlns="https://image.shutterstock.com/image-vector/board-game-icon-illustration-260nw-1007936833.jpg">
-                <MenuItem> Petits chevaux </MenuItem>
-                <MenuItem> Trivial poursuit</MenuItem>
-                <MenuItem> Monopoly </MenuItem>
-              </SubMenu>
-              <SubMenu label="Ruby" icon={<Diamond />}>
-                <MenuItem> Decks</MenuItem>
-                <MenuItem> Layout</MenuItem>
-                <SubMenu label="Forms">
-                  <MenuItem> Input</MenuItem>
-                  <MenuItem> Select</MenuItem>
-                  <SubMenu label="More">
-                    <MenuItem> CheckBox</MenuItem>
-                    <MenuItem> Radio</MenuItem>
-                  </SubMenu>
-                </SubMenu>
+                <MenuItem component={<Link to="factory" />}> Entreprise</MenuItem>
+                <MenuItem component={<Link to="school" />}> Etablissement</MenuItem>
+                <MenuItem component={<Link to="student" />}> Etudiant</MenuItem>
               </SubMenu>
             </Menu>
 

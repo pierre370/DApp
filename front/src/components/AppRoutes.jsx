@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom"
-// import UnoCard from "../../pages/app/cards/uno"
-// import Admin from "../../pages/admin"
-// import Pilotes from "../../pages/app/league/driver/f1/pilote"
+import Student from "../pages/etudiant"
+import School from "../pages/etablissement"
+import Factory from "../pages/entreprise"
 
 const AppRoutes = () => {
     return (
         <Routes>
-             {/* <Route path='cards/uno' element={<UnoCard />} /> */}
-           {/* <Route path='league/driver/f1/pilote/*' element={<Pilotes />} />
-            <Route path='admin/*' element={<Admin />} /> */}
+            <Route path='factory' element={<Factory />} />
+            <Route path='student' element={<Student />} />
+            <Route path='school' element={<School />} />
         </Routes>
     )
 }
