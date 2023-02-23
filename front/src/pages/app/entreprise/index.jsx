@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import Tableau from "../../../components/table"
 import axios from 'axios'
+import { Box } from "@mui/material"
+import useWindowDimensions from "../../../components/hooks/useWindowDimensions"
 
 const data = [
     { id: 1, name: "hgfjg", surname: "ddfgfikgh"  },
@@ -27,6 +29,9 @@ const columns = [
 
 const Factory = () => {
 
+    const { height, width } = useWindowDimensions()
+
+    console.log(width)
     const [balances, setBalances] = useState({});
 
     useEffect(() => {
@@ -39,7 +44,9 @@ const Factory = () => {
     console.log(balances)
 
     return (
-        <Tableau data={data} columns={columns} loading={data.length > 0 ? false : true} dialogComponent  />
+        <Box sx={{ width: width-291, bgcolor: 'background.paper', padding: '20px' }}>
+            <Tableau data={data} columns={columns} loading={data.length > 0 ? false : true} dialogComponent  />
+        </Box>        
     )
 }
 

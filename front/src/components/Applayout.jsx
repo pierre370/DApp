@@ -129,21 +129,6 @@ const Applayout = memo(() => {
                 <MenuItem component={<Link to="student" />}> Etudiant</MenuItem>
               </SubMenu>
             </Menu>
-            <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
-              <Typography
-                variant="body2"
-                fontWeight={600}
-                style={{ opacity: collapsed ? 0 : 0.7, letterSpacing: '0.5px' }}
-              >
-                Extra
-              </Typography>
-            </div>
-            <Menu menuItemStyles={menuItemStyles}>
-              <MenuItem icon={<Calendar />} suffix={<Badge variant="success">New</Badge>}>
-                Calendar
-              </MenuItem>
-              <MenuItem icon={<Book />}>Documentation</MenuItem>
-            </Menu>
           </div>
         </div>
       </Sidebar>
