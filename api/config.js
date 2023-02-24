@@ -1,4 +1,4 @@
-const CONTACT_ADDRESS = '0xd9145CCE52D386f254917e481eB44e9943F39138';
+const CONTACT_ADDRESS = '0xc835ecA69e513E55605548a8C975fF7bd38ff76B';
 
 const CONTACT_ABI = [
         {
@@ -70,7 +70,7 @@ const CONTACT_ABI = [
   }
 ];
 
-// export default {
-//         CONTACT_ABI,
-//         CONTACT_ADDRESS,
-// };
+export default {
+        CONTACT_ABI,
+        CONTACT_ADDRESS,
+};

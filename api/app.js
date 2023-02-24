@@ -16,7 +16,7 @@ const port = 4000
 //   })
 // );
 
-const MORALIS_API_KEY = 'BWiMGBdJ5qkxQVL3zfWwWAchVNi23T5vTuwL9UmzuchXV3cAY9jIg2Visve4Bc8L';
+// const MORALIS_API_KEY = 'BWiMGBdJ5qkxQVL3zfWwWAchVNi23T5vTuwL9UmzuchXV3cAY9jIg2Visve4Bc8L';
 // const address = '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d';
 
 // app.get('/balances', async (req, res) => {
@@ -85,52 +85,127 @@ const MORALIS_API_KEY = 'BWiMGBdJ5qkxQVL3zfWwWAchVNi23T5vTuwL9UmzuchXV3cAY9jIg2V
 // startServer();
 
 
-// const express = require('express');
-// const app = express();
-// const cors = require('cors');
-// // const routes = require('./routes');
-// const Web3 = require('web3');
-// const Web3Eth = require('web3-eth');
-// const mongodb = require('mongodb').MongoClient;
-// // const contract = require('@truffle/contract');
-// // const artifacts = require('./build/contracts/Contacts.json');
-// const CONTACT_ABI = require('./config');
-// const CONTACT_ADDRESS = require('./config');
+const express = require('express');
+const app = express();
+const cors = require('cors');
+// const routes = require('./routes');
+const Web3 = require('web3');
+const Web3Eth = require('web3-eth');
+const mongodb = require('mongodb').MongoClient;
+// const contract = require('@truffle/contract');
+// const artifacts = require('./build/contracts/Contacts.json');
 
-// app.use(cors());
-// app.use(express.json());
+const CONTACT_ADDRESS = '0xc835ecA69e513E55605548a8C975fF7bd38ff76B';
 
-// if (typeof web3 !== 'undefined') {
-//         var web3 = new Web3(web3.currentProvider); 
-// } else {
-//         var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
-// }
+const CONTACT_ABI = [
+        {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "contacts",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "phone",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "count",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_phone",
+        "type": "string"
+      }
+    ],
+    "name": "createContact",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+];
 
-// mongodb.connect('mongodb://127.0.0.1:27017/blockchain-node-api',
-//         {
-//                 useUnifiedTopology: true,
-//         }, async (err, client) => {
-//         const db =client.db('Cluster0');
-//         const accounts = await web3.eth.getAccounts();
-//         const contactList = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+app.use(cors());
+app.use(express.json());
 
-//         app.get('/contacts', async (request, response) => {
-//           console.log('here')
-//           let cache = [];
-//           const COUNTER = await contactList.methods.count().call();
+if (typeof web3 !== 'undefined') {
+        var web3 = new Web3(web3.currentProvider); 
+} else {
+        var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:3000'));
+}
+console.log('jkrfdlf')
 
-//           for (let i = 1; i <= COUNTER; i++) {
-//             const contact = await contactList.methods.contacts(i).call();
-//             cache = [...cache, contact];
-//           }
+mongodb.connect('mongodb://localhost:27017/blockchain-node-api',
+        {
+          useUnifiedTopology: true,
+        }, async (err, client) => {
+          console.log('dhfgdu')
+        // const db =client.db('Cluster0');
+        // const accounts = await web3.eth.getAccounts();
+        
+}).then(() => console.log('✅ Successfully connected to the database'))
+.catch((e) => console.log(`⛔️ Error during database connection ${e}`));
 
-//           response.json(cache);
-//         });
-//         app.listen(process.env.PORT || 3001, () => {
-//                 console.log('listening on port '+ (process.env.PORT || 3001));
-//         });
-// });
-
+// console.log('12', CONTACT_ABI)
+const contactList = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+// console.log(contactList.methods.count().call())
+        app.get('/contacts', async (request, response) => {
+          // console.log('here', await contactList.methods.count().call())
+          let cache = [];
+          // const counter = await contactList.methods.count().call()
+          // console.log('198', await counter)
+          for (let i = 1; i <= 3; i++) {
+            const contact = await contactList.methods.contacts(i).call();
+            cache = [...cache, contact];
+          }
+          // console.log('hreur')
+          response.json(cache);
+        });
+        app.listen(process.env.PORT || 3001, () => {
+                console.log('listening on port '+ (process.env.PORT || 3001));
+        });
 // const startServer = async () => {
 //   await Moralis.start({
 //     apiKey: MORALIS_API_KEY,
@@ -144,49 +219,49 @@ const MORALIS_API_KEY = 'BWiMGBdJ5qkxQVL3zfWwWAchVNi23T5vTuwL9UmzuchXV3cAY9jIg2V
 // startServer();
 
 /* Compile And Push To Eth Network */
-const fs = require('fs');
-const path = require('path');
-const solc = require('solc');
-const Web3 = require('Web3');
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = '<YOUR SEED PHRASE HERE>'; /* YOUR SEED PHRASE ... */
-const providerOrUrl = '<RINKEBY ENDPOINT HERE>' /* RINKEBY ENDPOINT */
+// const fs = require('fs');
+// const path = require('path');
+// const solc = require('solc');
+// const Web3 = require('Web3');
+// const HDWalletProvider = require('@truffle/hdwallet-provider');
+// const mnemonic = 'liberty fragile enter lounge floor secret agree innocent swear letter weird team'; /* YOUR SEED PHRASE ... */
+// const providerOrUrl = '<RINKEBY ENDPOINT HERE>' /* RINKEBY ENDPOINT */
 
-const provider = new HDWalletProvider({ mnemonic, providerOrUrl });
-const web3 = new Web3(provider);
-const content = fs.readFileSync('.contracts/Migrations.sol', 'utf8'); /* PATH TO CONTRACT */
+// const provider = new HDWalletProvider({ mnemonic, providerOrUrl });
+// const web3 = new Web3(provider);
+// const content = fs.readFileSync('.contracts/Migrations.sol', 'utf8'); /* PATH TO CONTRACT */
 
-const input = {
-  language: 'Solidity',
-  sources: {
-    'Migrations.sol': { content }
-  },
-  settings: {
-    outputSelection: { '*': { '*': ['*'] } }
-  }
-};
+// const input = {
+//   language: 'Solidity',
+//   sources: {
+//     'Migrations.sol': { content }
+//   },
+//   settings: {
+//     outputSelection: { '*': { '*': ['*'] } }
+//   }
+// };
 
-async function deploy (){
-  /* 1. Get Ethereum Account */
-  const [account] = await web3.eth.getAccounts();
+// async function deploy (){
+//   /* 1. Get Ethereum Account */
+//   const [account] = await web3.eth.getAccounts();
 
-  /* 2. Compile Smart Contract */
-  const {contracts} = JSON.parse(
-    solc.compile(JSON.stringify(input))
-  );
-console.log('contracts', contracts)
-  const contract = contracts['Migrations.sol'].MyContract;
+//   /* 2. Compile Smart Contract */
+//   const {contracts} = JSON.parse(
+//     solc.compile(JSON.stringify(input))
+//   );
+// console.log('contracts', contracts)
+//   const contract = contracts['Migrations.sol'].MyContract;
 
-  /* 2. Extract Abi And Bytecode From Contract */
-  const abi = contract.abi;
-  const bytecode = contract.evm.bytecode.object;
+//   /* 2. Extract Abi And Bytecode From Contract */
+//   const abi = contract.abi;
+//   const bytecode = contract.evm.bytecode.object;
 
-  /* 3. Send Smart Contract To Blockchain */
-  const { _address } = await new web3.eth.Contract(abi)
-    .deploy({ data: bytecode })
-    .send({from: account, gas: 1000000 });
+//   /* 3. Send Smart Contract To Blockchain */
+//   const { _address } = await new web3.eth.Contract(abi)
+//     .deploy({ data: bytecode })
+//     .send({from: account, gas: 1000000 });
 
-  console.log("Contract Address =>", _address);
-};
+//   console.log("Contract Address =>", _address);
+// };
 
-deploy();
+// deploy();
